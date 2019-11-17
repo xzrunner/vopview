@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="dataset">
+      <UniqueIdentifier>{10c5bffa-9559-4a21-9856-a88c3d673bf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\node">
+      <UniqueIdentifier>{2b17883f-d6ef-471a-8c3c-25139cad5d6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\pin">
+      <UniqueIdentifier>{eedb16b6-685b-48e8-8e6d-dd13c43efd8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{e7c7e2d6-847d-4155-af07-cc2ee3b16d05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools\rtti">
+      <UniqueIdentifier>{0b864d63-dfa1-4e56-8406-be95ffc422dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools\trans">
+      <UniqueIdentifier>{c906ae32-ae02-4d86-b0b2-b04a445c1252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{fddc87d2-bfba-4674-be26-a1ee23efcc77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\toolbar">
+      <UniqueIdentifier>{26929e2b-e133-41c6-8d19-d14bb4b88bcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\stage">
+      <UniqueIdentifier>{05ad5c45-f086-4093-9385-975d31e5aa0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\blueprint">
+      <UniqueIdentifier>{1aa2829c-20b9-48ae-9aa9-945095c66a7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools\eval">
+      <UniqueIdentifier>{fd571ee7-8be0-45d4-8ee8-3116df573619}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\vopview\Node.h">
+      <Filter>dataset\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\vopview\PinCallback.h">
+      <Filter>dataset\pin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\vopview\PinType.h">
+      <Filter>dataset\pin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\vopview\WxToolbarPanel.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\vopview\WxNodeProperty.h">
+      <Filter>view\toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\vopview\WxStageCanvas.h">
+      <Filter>view\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\vopview\RegistNodes.h">
+      <Filter>tools\rtti</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\vopview\Serializer.h">
+      <Filter>view\blueprint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\vopview\VOPView.h" />
+    <ClInclude Include="..\..\..\include\vopview\VOPAdapter.h">
+      <Filter>tools\trans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\vopview\Evaluator.h">
+      <Filter>tools\eval</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\Node.cpp">
+      <Filter>dataset\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\PinCallback.cpp">
+      <Filter>dataset\pin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\WxToolbarPanel.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\WxNodeProperty.cpp">
+      <Filter>view\toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\WxStageCanvas.cpp">
+      <Filter>view\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\RegistRTTR.cpp">
+      <Filter>tools\rtti</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\RegistNodes.cpp">
+      <Filter>tools\rtti</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\Serializer.cpp">
+      <Filter>view\blueprint</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\VOPView.cpp" />
+    <ClCompile Include="..\..\..\source\VOPAdapter.cpp">
+      <Filter>tools\trans</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\Evaluator.cpp">
+      <Filter>tools\eval</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

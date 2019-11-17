@@ -1,0 +1,5 @@
+vopview/
+projects/*
+
+!projects/vopview.vcxproj
+!projects/vopview.vcxproj.filters
