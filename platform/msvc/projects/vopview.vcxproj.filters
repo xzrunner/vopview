@@ -67,6 +67,9 @@
     <ClInclude Include="..\..\..\include\vopview\Evaluator.h">
       <Filter>tools\eval</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\vopview\WxGraphPage.h">
+      <Filter>view\blueprint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Node.cpp">
@@ -99,6 +102,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\Evaluator.cpp">
       <Filter>tools\eval</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\WxGraphPage.cpp">
+      <Filter>view\blueprint</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
