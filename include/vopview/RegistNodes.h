@@ -26,9 +26,25 @@ public:                                    \
 
 #define VOPV_NODE_PROP
 
+class Subnetwork : public Node
+{
+public:
+    Subnetwork(const std::string& title = "Subnetwork")
+        : Node(title, true)
+    {
+        InitPins("subnetwork");
+    }
+
+    std::vector<bp::NodePtr> children;
+
+    RTTR_ENABLE(Node)
+};
+
 // globals
 VOPV_DEFINE_NODE(GeoGlobalParams, geo_global_params, VOPV_NODE_PROP)
 VOPV_DEFINE_NODE(GeoOutputVars, geo_output_vars, VOPV_NODE_PROP)
+
+// utility
 
 }
 
