@@ -2,6 +2,8 @@
 
 #include <ee0/WxStagePage.h>
 
+namespace vop { class Evaluator; }
+
 namespace vopv
 {
 
@@ -10,8 +12,7 @@ class Evaluator;
 class WxGraphPage : public ee0::WxStagePage
 {
 public:
-	WxGraphPage(wxWindow* parent, const ee0::SubjectMgrPtr& sub_mgr,
-        const ee0::GameObj& root);
+	WxGraphPage(wxWindow* parent, const ee0::SubjectMgrPtr& sub_mgr);
     virtual ~WxGraphPage();
 
     virtual void OnNotify(uint32_t msg, const ee0::VariantSet& variants) override;
@@ -24,14 +25,16 @@ public:
     auto GetEval() const { return m_eval; }
 
     auto GetRootNode() const { return m_root; }
-    void SetRootNode(const ee0::GameObj& root) { m_root = root; }
+    void SetRootNode(const ee0::GameObj& root,
+        const std::shared_ptr<vop::Evaluator>& eval);
 
 private:
-    void InitToolbarPanel();
-
     bool ClearAllSceneObjs();
     bool InsertSceneObj(const ee0::VariantSet& variants);
     bool DeleteSceneObj(const ee0::VariantSet& variants);
+
+    bool AfterInsertNodeConn(const ee0::VariantSet& variants);
+    bool BeforeDeleteNodeConn(const ee0::VariantSet& variants);
 
 private:
     n0::SceneNodePtr m_root = nullptr;

@@ -30,12 +30,10 @@ const uint32_t MESSAGES[] =
 namespace vopv
 {
 
-WxGraphPage::WxGraphPage(wxWindow* parent, const ee0::SubjectMgrPtr& sub_mgr,
-                         const ee0::GameObj& root)
+WxGraphPage::WxGraphPage(wxWindow* parent, const ee0::SubjectMgrPtr& sub_mgr)
     : ee0::WxStagePage(parent, sub_mgr)
-    , m_root(root)
 {
-    m_eval = std::make_shared<Evaluator>();
+    m_eval = std::make_shared<Evaluator>(nullptr);
 
     for (auto& msg : MESSAGES) {
         m_sub_mgr->RegisterObserver(msg, this);
@@ -65,6 +63,16 @@ void WxGraphPage::OnNotify(uint32_t msg, const ee0::VariantSet& variants)
 	case ee0::MSG_SCENE_NODE_CLEAR:
         dirty = ClearAllSceneObjs();
 		break;
+
+    case bp::MSG_BP_CONN_INSERT:
+        dirty = AfterInsertNodeConn(variants);
+        break;
+    case bp::MSG_BP_CONN_DELETE:
+        dirty = BeforeDeleteNodeConn(variants);
+        break;
+    case bp::MSG_BP_CONN_REBUILD:
+        dirty = m_eval->OnRebuildConnection();
+        break;
 	}
 
 	if (dirty)
@@ -89,6 +97,29 @@ void WxGraphPage::SetPreviewCanvas(const std::shared_ptr<ee0::WxStageCanvas>& ca
     //    auto canvas = std::static_pointer_cast<WxStageCanvas>(m_preview_canvas);
     //    canvas->SetGraphStage(this);
     //}
+}
+
+void WxGraphPage::SetRootNode(const ee0::GameObj& root, const std::shared_ptr<vop::Evaluator>& eval)
+{
+    m_root = root;
+
+    m_eval = std::make_shared<Evaluator>(eval);
+
+    if (root && root->HasSharedComp<n0::CompComplex>())
+    {
+        auto& ccomplex = root->GetSharedComp<n0::CompComplex>();
+        for (auto& c : ccomplex.GetAllChildren())
+        {
+            if (c->HasUniqueComp<bp::CompNode>()) {
+                auto& cnode = c->GetUniqueComp<bp::CompNode>();
+                auto bp_node = cnode.GetNode();
+                if (bp_node) {
+                    m_eval->OnAddNode(*bp_node);
+                }
+            }
+        }
+    }
+    m_eval->OnRebuildConnection();
 }
 
 bool WxGraphPage::ClearAllSceneObjs()
@@ -156,6 +187,26 @@ bool WxGraphPage::DeleteSceneObj(const ee0::VariantSet& variants)
     }
 
     return dirty;
+}
+
+bool WxGraphPage::AfterInsertNodeConn(const ee0::VariantSet& variants)
+{
+    auto var = variants.GetVariant("conn");
+    GD_ASSERT(var.m_type == ee0::VT_PVOID, "no var in vars: conn");
+    const std::shared_ptr<bp::Connecting>* conn = static_cast<const std::shared_ptr<bp::Connecting>*>(var.m_val.pv);
+    GD_ASSERT(conn, "err conn");
+
+    return m_eval->OnConnected(**conn);
+}
+
+bool WxGraphPage::BeforeDeleteNodeConn(const ee0::VariantSet& variants)
+{
+    auto var = variants.GetVariant("conn");
+    GD_ASSERT(var.m_type == ee0::VT_PVOID, "no var in vars: conn");
+    const std::shared_ptr<bp::Connecting>* conn = static_cast<const std::shared_ptr<bp::Connecting>*>(var.m_val.pv);
+    GD_ASSERT(conn, "err conn");
+
+    return m_eval->OnDisconnecting(**conn);
 }
 
 }

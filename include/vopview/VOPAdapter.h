@@ -1,14 +1,18 @@
 #pragma once
 
-#include <vop/typedef.h>
+#include <blueprint/typedef.h>
 
-namespace vop { class Node; }
+#include <memory>
+#include <vector>
+
+namespace vop { class Node; class Evaluator; }
 namespace bp { class Node; class Pin; }
 
 namespace vopv
 {
 
 class Evaluator;
+class Node;
 
 class VOPAdapter
 {
@@ -16,7 +20,13 @@ public:
     static void UpdatePropBackFromFront(const bp::Node& front,
         vop::Node& back, const Evaluator& eval);
 
-    static vop::NodePtr CreateBackFromFront(const bp::Node& front);
+    static std::shared_ptr<vop::Node>
+        CreateBackFromFront(const bp::Node& front);
+    static std::shared_ptr<Node>
+        CreateFrontFromBack(const vop::Node& back);
+
+    static std::shared_ptr<vop::Evaluator>
+        CreateBackEval(const std::vector<bp::NodePtr>& nodes);
 
 }; // SOP
 
