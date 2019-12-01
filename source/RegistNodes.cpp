@@ -26,7 +26,12 @@ rttr::registration::class_<vopv::Node>("vopv::node")
 REGIST_NODE_RTTI_DEFAULT(GeoGlobalParams, geo_global_params)
 REGIST_NODE_RTTI_DEFAULT(GeoOutputVars, geo_output_vars)
 
+// math
+REGIST_NODE_RTTI_DEFAULT(Add, add)
+REGIST_NODE_RTTI_DEFAULT(Multiply, multiply)
+
 // utility
+REGIST_NODE_RTTI_DEFAULT(Constant, constant)
 REGIST_NODE_RTTI_DEFAULT(Subnetwork, subnetwork)
 
 }

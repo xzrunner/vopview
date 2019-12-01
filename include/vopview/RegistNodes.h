@@ -44,7 +44,12 @@ public:
 VOPV_DEFINE_NODE(GeoGlobalParams, geo_global_params, VOPV_NODE_PROP)
 VOPV_DEFINE_NODE(GeoOutputVars, geo_output_vars, VOPV_NODE_PROP)
 
+// math
+VOPV_DEFINE_NODE(Add, add, VOPV_NODE_PROP)
+VOPV_DEFINE_NODE(Multiply, multiply, VOPV_NODE_PROP)
+
 // utility
+VOPV_DEFINE_NODE(Constant, constant, VOPV_NODE_PROP)
 
 }
 
