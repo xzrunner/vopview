@@ -7,6 +7,7 @@
 #include <blueprint/MessageID.h>
 #include <blueprint/CompNode.h>
 
+#include <vop/Evaluator.h>
 #include <node0/SceneNode.h>
 #include <node0/CompComplex.h>
 
@@ -103,6 +104,7 @@ void WxGraphPage::SetRootNode(const ee0::GameObj& root, const std::shared_ptr<vo
 {
     m_root = root;
 
+    eval->ClearAllNodes();
     m_eval = std::make_shared<Evaluator>(eval);
 
     if (root && root->HasSharedComp<n0::CompComplex>())

@@ -5,6 +5,7 @@
 #include <blueprint/Pin.h>
 
 #include <vop/Node.h>
+#include <vop/Evaluator.h>
 
 namespace vopv
 {
@@ -90,15 +91,16 @@ VOPAdapter::CreateFrontFromBack(const vop::Node& node)
     return dst;
 }
 
-std::shared_ptr<vop::Evaluator>
-VOPAdapter::CreateBackEval(const std::vector<bp::NodePtr>& nodes)
+void VOPAdapter::UpdateBackEval(const std::shared_ptr<vop::Evaluator>& dst_eval,
+                                const std::vector<bp::NodePtr>& src_nodes)
 {
-    Evaluator eval(nullptr);
-    for (auto& n : nodes) {
+    dst_eval->ClearAllNodes();
+    Evaluator eval(dst_eval);
+    for (auto& n : src_nodes) {
         eval.OnAddNode(*n);
     }
     eval.OnRebuildConnection();
-    return eval.GetEval();
+}
 
 int VOPAdapter::TypeBackToFront(hdiop::VarType type)
 {

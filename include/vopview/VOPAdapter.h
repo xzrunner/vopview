@@ -27,8 +27,8 @@ public:
     static std::shared_ptr<Node>
         CreateFrontFromBack(const vop::Node& back);
 
-    static std::shared_ptr<vop::Evaluator>
-        CreateBackEval(const std::vector<bp::NodePtr>& nodes);
+    static void UpdateBackEval(const std::shared_ptr<vop::Evaluator>& dst_eval,
+        const std::vector<bp::NodePtr>& src_nodes);
 
     static int TypeBackToFront(hdiop::VarType type);
 
