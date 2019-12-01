@@ -2,6 +2,8 @@
 
 #include <blueprint/typedef.h>
 
+#include <hdiop/VarType.h>
+
 #include <memory>
 #include <vector>
 
@@ -27,6 +29,8 @@ public:
 
     static std::shared_ptr<vop::Evaluator>
         CreateBackEval(const std::vector<bp::NodePtr>& nodes);
+
+    static int TypeBackToFront(hdiop::VarType type);
 
 }; // SOP
 

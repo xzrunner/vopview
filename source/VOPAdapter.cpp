@@ -2,6 +2,8 @@
 #include "vopview/RegistNodes.h"
 #include "vopview/Evaluator.h"
 
+#include <blueprint/Pin.h>
+
 #include <vop/Node.h>
 
 namespace vopv
@@ -97,6 +99,34 @@ VOPAdapter::CreateBackEval(const std::vector<bp::NodePtr>& nodes)
     }
     eval.OnRebuildConnection();
     return eval.GetEval();
+
+int VOPAdapter::TypeBackToFront(hdiop::VarType type)
+{
+    int ret = -1;
+    switch (type)
+    {
+    case hdiop::VarType::Any:
+        ret = bp::PIN_ANY_VAR;
+        break;
+    case hdiop::VarType::Bool:
+        ret = bp::PIN_BOOLEAN;
+        break;
+    case hdiop::VarType::Int:
+        ret = bp::PIN_INTEGER;
+        break;
+    case hdiop::VarType::Float:
+        ret = bp::PIN_FLOAT1;
+        break;
+    case hdiop::VarType::Float3:
+        ret = bp::PIN_FLOAT3;
+        break;
+    case hdiop::VarType::String:
+        ret = bp::PIN_STRING;
+        break;
+    default:
+        assert(0);
+    }
+    return ret;
 }
 
 }

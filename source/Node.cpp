@@ -1,4 +1,5 @@
 #include "vopview/Node.h"
+#include "vopview/VOPAdapter.h"
 
 #include <blueprint/Pin.h>
 
@@ -83,6 +84,7 @@ void Node::InitPins(const std::string& name)
             PinDesc d;
 
 			auto& s = src[i];
+            d.type = VOPAdapter::TypeBackToFront(s.var.type);
             d.name = s.var.name;
 
             dst.push_back(d);
