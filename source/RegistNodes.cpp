@@ -31,8 +31,65 @@ REGIST_NODE_RTTI_DEFAULT(Add, add)
 REGIST_NODE_RTTI_DEFAULT(Multiply, multiply)
 
 // utility
-REGIST_NODE_RTTI_DEFAULT(Constant, constant)
+REGIST_NODE_RTTI(Compare, compare,
+.property("type", &vopv::node::Compare::type)                             \
+(                                                                         \
+    rttr::metadata(ee0::UIMetaInfoTag(), ee0::UIMetaInfo("Compare Type")) \
+)                                                                         \
+)
+REGIST_NODE_RTTI(Constant, constant,
+.property("type", &vopv::node::Constant::type)                              \
+(                                                                           \
+    rttr::metadata(ee0::UIMetaInfoTag(), ee0::UIMetaInfo("Cosntant Type"))  \
+)                                                                           \
+.property("value", &vopv::node::Constant::value)                            \
+(                                                                           \
+    rttr::metadata(ee0::UIMetaInfoTag(), ee0::UIMetaInfo("Cosntant Value")) \
+)                                                                           \
+.property("name", &vopv::node::Constant::name)                              \
+(                                                                           \
+    rttr::metadata(ee0::UIMetaInfoTag(), ee0::UIMetaInfo("Cosntant Name"))  \
+)                                                                           \
+)
 REGIST_NODE_RTTI_DEFAULT(Subnetwork, subnetwork)
+
+// vector
+REGIST_NODE_RTTI(GetVec2Comp, get_vec2_comp,
+.property("comp_idx", &vopv::node::GetVec2Comp::comp_idx)              \
+(                                                                      \
+    rttr::metadata(ee0::UIMetaInfoTag(), ee0::UIMetaInfo("Component")) \
+)                                                                      \
+)
+REGIST_NODE_RTTI(SetVec2Comp, set_vec2_comp,
+.property("comp_idx", &vopv::node::SetVec2Comp::comp_idx)              \
+(                                                                      \
+    rttr::metadata(ee0::UIMetaInfoTag(), ee0::UIMetaInfo("Component")) \
+)                                                                      \
+)
+REGIST_NODE_RTTI(GetVec3Comp, get_vec3_comp,
+.property("comp_idx", &vopv::node::GetVec3Comp::comp_idx)              \
+(                                                                      \
+    rttr::metadata(ee0::UIMetaInfoTag(), ee0::UIMetaInfo("Component")) \
+)                                                                      \
+)
+REGIST_NODE_RTTI(SetVec3Comp, set_vec3_comp,
+.property("comp_idx", &vopv::node::SetVec3Comp::comp_idx)              \
+(                                                                      \
+    rttr::metadata(ee0::UIMetaInfoTag(), ee0::UIMetaInfo("Component")) \
+)                                                                      \
+)
+REGIST_NODE_RTTI(GetVec4Comp, get_vec4_comp,
+.property("comp_idx", &vopv::node::GetVec4Comp::comp_idx)              \
+(                                                                      \
+    rttr::metadata(ee0::UIMetaInfoTag(), ee0::UIMetaInfo("Component")) \
+)                                                                      \
+)
+REGIST_NODE_RTTI(SetVec4Comp, set_vec4_comp,
+.property("comp_idx", &vopv::node::SetVec4Comp::comp_idx)              \
+(                                                                      \
+    rttr::metadata(ee0::UIMetaInfoTag(), ee0::UIMetaInfo("Component")) \
+)                                                                      \
+)
 
 }
 

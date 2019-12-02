@@ -6,14 +6,85 @@
 
 #include <vop/Node.h>
 #include <vop/Evaluator.h>
+// utility
+#include <vop/node/Compare.h>
+#include <vop/node/Constant.h>
+// vector
+#include <vop/node/GetVectorComponent.h>
+#include <vop/node/SetVectorComponent.h>
 
 namespace vopv
 {
 
-void VOPAdapter::UpdatePropBackFromFront(const bp::Node& front,
-                                  vop::Node& back,
-                                  const Evaluator& eval)
+void VOPAdapter::UpdatePropBackFromFront(const bp::Node& front, vop::Node& back,
+                                         const Evaluator& eval)
 {
+    auto type = front.get_type();
+    // utility
+    if (type == rttr::type::get<node::Compare>())
+    {
+        auto& src = static_cast<const node::Compare&>(front);
+        auto& dst = static_cast<vop::node::Compare&>(back);
+        dst.SetCmpType(src.type);
+    }
+    else if (type == rttr::type::get<node::Constant>())
+    {
+        auto& src = static_cast<const node::Constant&>(front);
+        auto& dst = static_cast<vop::node::Constant&>(back);
+        dst.SetConstType(src.type);
+        switch (src.type)
+        {
+        case vop::node::Constant::Type::ConstFloat:
+            dst.SetConstValue(hdiop::Variable(src.value.x));
+            break;
+        //case vop::node::Constant::Type::ConstFloat2:
+        //    dst.SetConstValue(hdiop::Variable(sm::vec2(src.value.x, src.value.y)));
+        //    break;
+        case vop::node::Constant::Type::ConstFloat3:
+            dst.SetConstValue(hdiop::Variable(sm::vec3(src.value.xyzw)));
+            break;
+        default:
+            assert(0);
+        }
+        dst.SetConstName(src.name);
+    }
+    // vector
+    else if (type == rttr::type::get<node::GetVec2Comp>())
+    {
+        auto& src = static_cast<const node::GetVec2Comp&>(front);
+        auto& dst = static_cast<vop::node::GetVec2Comp&>(back);
+        dst.SetCompIndex(src.comp_idx);
+    }
+    else if (type == rttr::type::get<node::SetVec2Comp>())
+    {
+        auto& src = static_cast<const node::SetVec2Comp&>(front);
+        auto& dst = static_cast<vop::node::SetVec2Comp&>(back);
+        dst.SetCompIndex(src.comp_idx);
+    }
+    else if (type == rttr::type::get<node::GetVec3Comp>())
+    {
+        auto& src = static_cast<const node::GetVec3Comp&>(front);
+        auto& dst = static_cast<vop::node::GetVec3Comp&>(back);
+        dst.SetCompIndex(src.comp_idx);
+    }
+    else if (type == rttr::type::get<node::SetVec3Comp>())
+    {
+        auto& src = static_cast<const node::SetVec3Comp&>(front);
+        auto& dst = static_cast<vop::node::SetVec3Comp&>(back);
+        dst.SetCompIndex(src.comp_idx);
+    }
+    else if (type == rttr::type::get<node::GetVec4Comp>())
+    {
+        auto& src = static_cast<const node::GetVec4Comp&>(front);
+        auto& dst = static_cast<vop::node::GetVec4Comp&>(back);
+        dst.SetCompIndex(src.comp_idx);
+    }
+    else if (type == rttr::type::get<node::SetVec4Comp>())
+    {
+        auto& src = static_cast<const node::SetVec4Comp&>(front);
+        auto& dst = static_cast<vop::node::SetVec4Comp&>(back);
+        dst.SetCompIndex(src.comp_idx);
+    }
 }
 
 std::shared_ptr<vop::Node>
@@ -119,8 +190,14 @@ int VOPAdapter::TypeBackToFront(hdiop::VarType type)
     case hdiop::VarType::Float:
         ret = bp::PIN_FLOAT1;
         break;
+    case hdiop::VarType::Float2:
+        ret = bp::PIN_FLOAT2;
+        break;
     case hdiop::VarType::Float3:
         ret = bp::PIN_FLOAT3;
+        break;
+    case hdiop::VarType::Float4:
+        ret = bp::PIN_FLOAT4;
         break;
     case hdiop::VarType::String:
         ret = bp::PIN_STRING;
