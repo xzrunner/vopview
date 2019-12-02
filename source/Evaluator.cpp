@@ -59,6 +59,17 @@ void Evaluator::OnClearAllNodes()
     m_nodes_map.clear();
 }
 
+void Evaluator::OnNodePropChanged(const bp::NodePtr& node)
+{
+    auto itr = m_nodes_map.find(node.get());
+    // not sop node
+    if (itr == m_nodes_map.end()) {
+        return;
+    }
+
+    VOPAdapter::UpdatePropBackFromFront(*node, *itr->second, *this);
+}
+
 vop::NodePtr Evaluator::QueryBackNode(const bp::Node& front_node) const
 {
     auto itr = m_nodes_map.find(&front_node);
@@ -81,7 +92,7 @@ bool Evaluator::OnConnected(const bp::Connecting& conn)
         t_itr->second->AddInputPorts(t_itr->first->GetAllInput().size() - t_itr->first->GetAllOutput().size());
     }
 
-    hdiop::make_connecting<hdiop::VarType>(
+    m_eval->Connect(
         { f_itr->second, f_pin->GetPosIdx() },
         { t_itr->second, t_pin->GetPosIdx() }
     );
@@ -100,7 +111,7 @@ bool Evaluator::OnDisconnecting(const bp::Connecting& conn)
         return false;
     }
 
-    hdiop::disconnect<hdiop::VarType>(
+    m_eval->Disconnect(
         { f_itr->second, f_pin->GetPosIdx() },
         { t_itr->second, t_pin->GetPosIdx() }
     );
@@ -137,7 +148,7 @@ bool Evaluator::OnRebuildConnection()
                     t_itr->second->AddInputPorts(t_itr->first->GetAllInput().size() - t_itr->first->GetAllOutput().size());
                 }
 
-                hdiop::make_connecting<hdiop::VarType>(
+                m_eval->Connect(
                     { f_itr->second, f_pin->GetPosIdx() },
                     { t_itr->second, t_pin->GetPosIdx() }
                 );

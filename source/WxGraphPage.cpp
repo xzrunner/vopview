@@ -31,8 +31,10 @@ const uint32_t MESSAGES[] =
 namespace vopv
 {
 
-WxGraphPage::WxGraphPage(wxWindow* parent, const ee0::SubjectMgrPtr& sub_mgr)
+WxGraphPage::WxGraphPage(wxWindow* parent, const ee0::SubjectMgrPtr& sub_mgr,
+                         const ee0::GameObj& root)
     : ee0::WxStagePage(parent, sub_mgr)
+    , m_root(root)
 {
     m_eval = std::make_shared<Evaluator>(nullptr);
 
@@ -74,6 +76,9 @@ void WxGraphPage::OnNotify(uint32_t msg, const ee0::VariantSet& variants)
     case bp::MSG_BP_CONN_REBUILD:
         dirty = m_eval->OnRebuildConnection();
         break;
+    case bp::MSG_BP_NODE_PROP_CHANGED:
+        dirty = UpdateNodeProp(variants);
+        break;
 	}
 
 	if (dirty)
@@ -91,12 +96,13 @@ void WxGraphPage::Traverse(std::function<bool(const ee0::GameObj&)> func,
 
 void WxGraphPage::SetPreviewCanvas(const std::shared_ptr<ee0::WxStageCanvas>& canvas)
 {
-    m_preview_canvas = canvas;
+//    GetImpl().SetCanvas(canvas);
 
-    //if (m_preview_canvas)
+    m_preview_canvas = canvas;
+    //if (canvas)
     //{
-    //    auto canvas = std::static_pointer_cast<WxStageCanvas>(m_preview_canvas);
-    //    canvas->SetGraphStage(this);
+    //    auto vop_preview_canvas = std::static_pointer_cast<WxStageCanvas>(canvas);
+    //    vop_preview_canvas->SetGraphStage(this);
     //}
 }
 
@@ -209,6 +215,29 @@ bool WxGraphPage::BeforeDeleteNodeConn(const ee0::VariantSet& variants)
     GD_ASSERT(conn, "err conn");
 
     return m_eval->OnDisconnecting(**conn);
+}
+
+bool WxGraphPage::UpdateNodeProp(const ee0::VariantSet& variants)
+{
+    auto var = variants.GetVariant("obj");
+    if (var.m_type == ee0::VT_EMPTY) {
+        return false;
+    }
+
+    GD_ASSERT(var.m_type == ee0::VT_PVOID, "no var in vars: obj");
+    const ee0::GameObj* obj = static_cast<const ee0::GameObj*>(var.m_val.pv);
+    GD_ASSERT(obj, "err scene obj");
+
+    if ((*obj)->HasUniqueComp<bp::CompNode>())
+    {
+        auto& bp_node = (*obj)->GetUniqueComp<bp::CompNode>().GetNode();
+        m_eval->OnNodePropChanged(bp_node);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 }

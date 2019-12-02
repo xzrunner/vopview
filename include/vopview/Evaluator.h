@@ -24,6 +24,9 @@ public:
     void OnRemoveNode(const bp::Node& node);
     void OnClearAllNodes();
 
+    // update node parm
+    void OnNodePropChanged(const bp::NodePtr& node);
+
     // update node conn
     bool OnConnected(const bp::Connecting& conn);
     bool OnDisconnecting(const bp::Connecting& conn);
