@@ -2,7 +2,7 @@
 
 #include <blueprint/typedef.h>
 
-#include <hdiop/VarType.h>
+#include <dag/VarType.h>
 
 #include <memory>
 #include <vector>
@@ -30,7 +30,7 @@ public:
     static void UpdateBackEval(const std::shared_ptr<vop::Evaluator>& dst_eval,
         const std::vector<bp::NodePtr>& src_nodes);
 
-    static int TypeBackToFront(hdiop::VarType type);
+    static int TypeBackToFront(dag::VarType type);
 
 }; // SOP
 

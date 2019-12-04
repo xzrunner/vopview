@@ -35,13 +35,13 @@ void VOPAdapter::UpdatePropBackFromFront(const bp::Node& front, vop::Node& back,
         switch (src.type)
         {
         case vop::node::Constant::Type::ConstFloat:
-            dst.SetConstValue(hdiop::Variable(src.value.x));
+            dst.SetConstValue(dag::Variable(src.value.x));
             break;
         //case vop::node::Constant::Type::ConstFloat2:
-        //    dst.SetConstValue(hdiop::Variable(sm::vec2(src.value.x, src.value.y)));
+        //    dst.SetConstValue(dag::Variable(sm::vec2(src.value.x, src.value.y)));
         //    break;
         case vop::node::Constant::Type::ConstFloat3:
-            dst.SetConstValue(hdiop::Variable(sm::vec3(src.value.xyzw)));
+            dst.SetConstValue(dag::Variable(sm::vec3(src.value.xyzw)));
             break;
         default:
             assert(0);
@@ -173,33 +173,33 @@ void VOPAdapter::UpdateBackEval(const std::shared_ptr<vop::Evaluator>& dst_eval,
     eval.OnRebuildConnection();
 }
 
-int VOPAdapter::TypeBackToFront(hdiop::VarType type)
+int VOPAdapter::TypeBackToFront(dag::VarType type)
 {
     int ret = -1;
     switch (type)
     {
-    case hdiop::VarType::Any:
+    case dag::VarType::Any:
         ret = bp::PIN_ANY_VAR;
         break;
-    case hdiop::VarType::Bool:
+    case dag::VarType::Bool:
         ret = bp::PIN_BOOLEAN;
         break;
-    case hdiop::VarType::Int:
+    case dag::VarType::Int:
         ret = bp::PIN_INTEGER;
         break;
-    case hdiop::VarType::Float:
+    case dag::VarType::Float:
         ret = bp::PIN_FLOAT1;
         break;
-    case hdiop::VarType::Float2:
+    case dag::VarType::Float2:
         ret = bp::PIN_FLOAT2;
         break;
-    case hdiop::VarType::Float3:
+    case dag::VarType::Float3:
         ret = bp::PIN_FLOAT3;
         break;
-    case hdiop::VarType::Float4:
+    case dag::VarType::Float4:
         ret = bp::PIN_FLOAT4;
         break;
-    case hdiop::VarType::String:
+    case dag::VarType::String:
         ret = bp::PIN_STRING;
         break;
     default:
