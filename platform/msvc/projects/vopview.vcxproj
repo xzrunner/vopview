@@ -20,7 +20,6 @@
     <ClInclude Include="..\..\..\include\vopview\RegistNodes.h" />
     <ClInclude Include="..\..\..\include\vopview\Serializer.h" />
     <ClInclude Include="..\..\..\include\vopview\WxGraphPage.h" />
-    <ClInclude Include="..\..\..\include\vopview\WxNodeProperty.h" />
     <ClInclude Include="..\..\..\include\vopview\WxStageCanvas.h" />
     <ClInclude Include="..\..\..\include\vopview\WxToolbarPanel.h" />
   </ItemGroup>
@@ -34,7 +33,6 @@
     <ClCompile Include="..\..\..\source\RegistRTTR.cpp" />
     <ClCompile Include="..\..\..\source\Serializer.cpp" />
     <ClCompile Include="..\..\..\source\WxGraphPage.cpp" />
-    <ClCompile Include="..\..\..\source\WxNodeProperty.cpp" />
     <ClCompile Include="..\..\..\source\WxStageCanvas.cpp" />
     <ClCompile Include="..\..\..\source\WxToolbarPanel.cpp" />
   </ItemGroup>

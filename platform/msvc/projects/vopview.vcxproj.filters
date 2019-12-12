@@ -48,9 +48,6 @@
     <ClInclude Include="..\..\..\include\vopview\WxToolbarPanel.h">
       <Filter>view\toolbar</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\vopview\WxNodeProperty.h">
-      <Filter>view\toolbar</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\vopview\WxStageCanvas.h">
       <Filter>view\stage</Filter>
     </ClInclude>
@@ -79,9 +76,6 @@
       <Filter>dataset\pin</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\WxToolbarPanel.cpp">
-      <Filter>view\toolbar</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\WxNodeProperty.cpp">
       <Filter>view\toolbar</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\WxStageCanvas.cpp">
