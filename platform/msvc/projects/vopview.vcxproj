@@ -18,7 +18,6 @@
     <ClInclude Include="..\..\..\include\vopview\PinCallback.h" />
     <ClInclude Include="..\..\..\include\vopview\PinType.h" />
     <ClInclude Include="..\..\..\include\vopview\RegistNodes.h" />
-    <ClInclude Include="..\..\..\include\vopview\Serializer.h" />
     <ClInclude Include="..\..\..\include\vopview\WxGraphPage.h" />
     <ClInclude Include="..\..\..\include\vopview\WxStageCanvas.h" />
     <ClInclude Include="..\..\..\include\vopview\WxToolbarPanel.h" />
@@ -31,7 +30,6 @@
     <ClCompile Include="..\..\..\source\PinCallback.cpp" />
     <ClCompile Include="..\..\..\source\RegistNodes.cpp" />
     <ClCompile Include="..\..\..\source\RegistRTTR.cpp" />
-    <ClCompile Include="..\..\..\source\Serializer.cpp" />
     <ClCompile Include="..\..\..\source\WxGraphPage.cpp" />
     <ClCompile Include="..\..\..\source\WxStageCanvas.cpp" />
     <ClCompile Include="..\..\..\source\WxToolbarPanel.cpp" />

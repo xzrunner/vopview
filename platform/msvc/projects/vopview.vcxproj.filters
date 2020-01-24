@@ -54,9 +54,6 @@
     <ClInclude Include="..\..\..\include\vopview\RegistNodes.h">
       <Filter>tools\rtti</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\vopview\Serializer.h">
-      <Filter>view\blueprint</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\vopview\VOPView.h" />
     <ClInclude Include="..\..\..\include\vopview\VOPAdapter.h">
       <Filter>tools\trans</Filter>
@@ -86,9 +83,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\RegistNodes.cpp">
       <Filter>tools\rtti</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\Serializer.cpp">
-      <Filter>view\blueprint</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\VOPView.cpp" />
     <ClCompile Include="..\..\..\source\VOPAdapter.cpp">
