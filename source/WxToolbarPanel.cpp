@@ -4,6 +4,7 @@
 #include <ee0/WxStagePage.h>
 #include <ee0/SubjectMgr.h>
 #include <ee0/WxNavigationBar.h>
+#include <ee0/WxStageCanvas.h>
 #include <blueprint/CompNode.h>
 #include <blueprint/WxNodeProperty.h>
 
@@ -17,7 +18,7 @@ WxToolbarPanel::WxToolbarPanel(wxWindow* parent, ee0::WxStagePage* stage_page)
 	: wxPanel(parent)
     , m_stage_page(stage_page)
 {
-	InitLayout();
+	InitLayout(stage_page->GetImpl().GetCanvas()->GetRenderDevice());
 
     auto& sub_mgr = stage_page->GetSubjectMgr();
     sub_mgr->RegisterObserver(ee0::MSG_NODE_SELECTION_INSERT, this);
@@ -37,14 +38,14 @@ void WxToolbarPanel::OnNotify(uint32_t msg, const ee0::VariantSet& variants)
 	}
 }
 
-void WxToolbarPanel::InitLayout()
+void WxToolbarPanel::InitLayout(const ur2::Device& dev)
 {
     auto sub_mgr = m_stage_page->GetSubjectMgr();
 
 	auto sizer = new wxBoxSizer(wxVERTICAL);
 
     // property
-	sizer->Add(m_node_prop = new bp::WxNodeProperty(this, sub_mgr), wxEXPAND);
+	sizer->Add(m_node_prop = new bp::WxNodeProperty(dev, this, sub_mgr), wxEXPAND);
 
 	SetSizer(sizer);
 }
