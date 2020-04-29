@@ -38,7 +38,7 @@ void WxToolbarPanel::OnNotify(uint32_t msg, const ee0::VariantSet& variants)
 	}
 }
 
-void WxToolbarPanel::InitLayout(const ur2::Device& dev)
+void WxToolbarPanel::InitLayout(const ur::Device& dev)
 {
     auto sub_mgr = m_stage_page->GetSubjectMgr();
 

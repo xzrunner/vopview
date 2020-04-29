@@ -8,7 +8,7 @@ namespace vopv
 class WxStageCanvas : public ee3::WxStageCanvas
 {
 public:
-    WxStageCanvas(const ur2::Device& dev, ee0::WxStagePage* stage,
+    WxStageCanvas(const ur::Device& dev, ee0::WxStagePage* stage,
         ECS_WORLD_PARAM const ee0::RenderContext& rc);
 
     void SetGraphStage(ee0::WxStagePage* stage) { m_graph_stage = stage; }

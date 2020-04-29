@@ -22,7 +22,7 @@ const uint32_t LIGHT_SELECT_COLOR = 0x88000088;
 namespace vopv
 {
 
-WxStageCanvas::WxStageCanvas(const ur2::Device& dev, ee0::WxStagePage* stage,
+WxStageCanvas::WxStageCanvas(const ur::Device& dev, ee0::WxStagePage* stage,
                              ECS_WORLD_PARAM const ee0::RenderContext& rc)
     : ee3::WxStageCanvas(dev, stage, ECS_WORLD_VAR &rc, nullptr, true)
 {

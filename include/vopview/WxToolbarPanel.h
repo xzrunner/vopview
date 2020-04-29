@@ -6,7 +6,7 @@
 
 namespace ee0 { class WxStagePage; class WxNavigationBar; }
 namespace bp { class WxNodeProperty; }
-namespace ur2 { class Device; }
+namespace ur { class Device; }
 
 namespace vopv
 {
@@ -19,7 +19,7 @@ public:
 	virtual void OnNotify(uint32_t msg, const ee0::VariantSet& variants) override;
 
 private:
-	void InitLayout(const ur2::Device& dev);
+	void InitLayout(const ur::Device& dev);
 
     void OnSelectionInsert(const ee0::VariantSet& variants);
     void OnSelectionClear(const ee0::VariantSet& variants);
